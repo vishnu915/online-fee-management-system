@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADC Fee Structure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <style>
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #f2f2f2;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar img {
+            height: 80px; /* Increased logo size */
+            margin-right: 20px;
+        }
+
+        .nav-title {
+            font-size: 32px;
+            font-weight: bold;
+            animation: colorChange 5s infinite;
+            margin-right: auto;
+        }
+
+        @keyframes colorChange {
+            0%   { color: #e74c3c; }   /* red */
+            25%  { color: #3498db; }   /* blue */
+            50%  { color: #2ecc71; }   /* green */
+            75%  { color: #f39c12; }   /* orange */
+            100% { color: #9b59b6; }   /* purple */
+        }
+
+        .navbar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            margin-left: auto;
+            color: #c0392b;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .flash {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash.success { background-color: #d4edda; color: #155724; }
+        .flash.error   { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+        <div class="nav-title">ADC Fee Structure</div>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('add_student') }}">Add New Student</a>
+        <a href="{{ url_for('report') }}">All Academic Years</a>
+        <a href="{{ url_for('fee_payment') }}">Fee Payment</a>
+        <a href="{{ url_for('payment_history') }}">Payment History</a>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

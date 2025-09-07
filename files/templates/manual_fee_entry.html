@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Manual Fee Entry for {{ student.name }}</h2>
+
+<form method="POST" class="card" style="max-width:600px; padding:20px;">
+
+    {% for ft in ['tuition_fee','practical_fee','university_fee','bus_fee','stationary_fee','internship_fee','viva_fee'] %}
+        <div style="margin-bottom:15px;">
+            <label>{{ ft.replace('_',' ').title() }}</label>
+            <input type="number" name="{{ ft }}" step="0.01" value="{{ fee[ft] if fee else '' }}">
+        </div>
+    {% endfor %}
+
+    <div style="margin-top:20px;">
+        <button type="submit" name="action" value="save" style="padding:10px 20px;">Save</button>
+    </div>
+</form>
+{% endblock %}
