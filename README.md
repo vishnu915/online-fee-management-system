@@ -90,9 +90,5 @@ This project is licensed under the MIT License.
 👨‍💻 Author
 
 Repana Vishnu Vardhan
-Python Full Stack Developer | Flask | React | MySQL | REST APIs
+SDE Intern@SaiKet Systems | Python Full Stack Developer (Flask/React) | REST APIs | MySQL | AI/ML Enthusiast
 
-
----
-
-Would you like me to also **write a small section in README** about **“How I gathered client requirements
