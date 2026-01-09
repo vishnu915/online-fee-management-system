@@ -12,20 +12,40 @@ The requirements were gathered directly from the **college administration**, and
 
 ---
 
-## 🚀 Features
-- **Admin Authentication**: Secure login & logout for administrators.
-- **Student Management**: Add new students and maintain academic details.
-- **Fee Payment**: Record and track student fee transactions.
-- **Academic Year Records**: Maintain fee details across multiple years.
-- **Payment History**: View all past fee transactions with timestamps.
-- **Dashboard**: Quick overview of fee collection and student status.
-- **Responsive UI** with background image and styled login form.
+✅ Key Features (With AI Integration)
+
+Secure Admin Authentication
+Login and logout functionality to ensure authorized access to sensitive student and fee data.
+
+Student Management System
+Add, update, and manage student profiles along with academic and enrollment details.
+
+Fee Payment Management
+Record student fee transactions and automatically track paid, pending, and outstanding balances.
+
+Academic Year–Wise Records
+Maintain student fee details across multiple academic years.
+
+Payment History Tracking
+View complete transaction history with timestamps for transparency and auditing.
+
+Interactive Admin Dashboard
+Provides a quick overview of total students, fee collection status, and pending balances using visual analytics.
+
+AI-Powered Admin Assistant (LLMs + RAG)
+Enables administrators to ask natural language queries such as “total fee collected” or “pending amount” and receive accurate, database-backed responses.
+
+AI-Based Financial Summaries & Insights
+Automatically generates summaries of fee collection, outstanding dues, and trends to assist management in decision-making.
+
+Responsive & User-Friendly Interface
+Fully responsive UI with a styled login page and background image for a modern experience.
 
 ---
 
 ## 🛠️ Tech Stack
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Flask (Python)
+- **Backend**: Flask (Python,AI,ML,LLM,RAg)
 - **Database**: MySQL
 - **Other Tools**: Bootstrap / Custom CSS for styling
 
