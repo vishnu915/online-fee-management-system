@@ -59,6 +59,8 @@ Fully responsive UI with a styled login page and background image for a modern e
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/172fbbeb-7491-4ef7-8b94-80c09818ddc8" />
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0804e50b-2bb3-4350-aa9b-b7f99b408c9d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/21c0ea85-0e6f-42fe-9d68-37f5aaa87953" />
+
 video clip link :https://youtu.be/eRXSaxXhVgk
 (Add screenshots here)
 
