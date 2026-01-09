@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Academic Years</h2>
+
+<!-- Search Form -->
+<form method="get" action="" style="margin-bottom:20px;">
+    <input type="text" name="search" placeholder="Search by name or admission no." value="{{ request.args.get('search', '') }}" />
+    <button type="submit">Search</button>
+</form>
+
+<!-- Academic Year and Group Navigation -->
+<div style="margin-bottom: 20px;">
+    {% for year, groups in group_data.items() %}
+        <div style="margin:10px 0;">
+            <strong>
+                <a href="?year={{ year }}{% if request.args.get('search') %}&search={{ request.args.get('search') }}{% endif %}{% if request.args.get('group') %}&group={{ request.args.get('group') }}{% endif %}{% if request.args.get('year_group') %}&year_group={{ request.args.get('year_group') }}{% endif %}" style="text-decoration:none; color:inherit;">
+                    {{ year }}
+                </a>
+            </strong>:
+            {% for group in groups %}
+                <span style="margin-left:10px;">
+                    <strong>{{ group }}</strong>
+                    (
+                        <a href="?year={{ year }}&group={{ group }}&year_group=1{% if request.args.get('search') %}&search={{ request.args.get('search') }}{% endif %}" style="margin-right:5px;">1st</a>
+                        <a href="?year={{ year }}&group={{ group }}&year_group=2{% if request.args.get('search') %}&search={{ request.args.get('search') }}{% endif %}" style="margin-right:5px;">2nd</a>
+                        <a href="?year={{ year }}&group={{ group }}&year_group=3{% if request.args.get('search') %}&search={{ request.args.get('search') }}{% endif %}" style="margin-right:10px;">3rd</a>
+                    )
+                </span>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Print Button -->
+<div style="margin-bottom: 20px;">
+    <button onclick="printTable()">🖨️ Print All Receipts</button>
+</div>
+
+<!-- Student Table -->
+<div id="print-section">
+    <table border="1" style="width:100%;text-align:center;border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Admission No.</th>
+                <th>Year</th>
+                <th>Group</th>
+                <th>Academic Year</th>
+                <th>Tuition (Pending)</th>
+                <th>Internship (Pending)</th>
+                <th>Practical (Pending)</th>
+                <th>University (Pending)</th>
+                <th>Stationary (Pending)</th>
+                <th>Bus (Pending)</th>
+                <th>Viva (Pending)</th>
+                <th>Total Fee</th>
+                <th>Total Paid</th>
+                <th>Total Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set current_year = None %}
+            {% set year_total_fee = 0.0 %}
+            {% set year_total_paid = 0.0 %}
+            {% set year_total_balance = 0.0 %}
+
+            {% for r in report_data %}
+                {% if current_year != r.academic_year %}
+                    {% if current_year %}
+                        <tr style="background-color:#f2f2f2; font-weight:bold;">
+                            <td colspan="12" style="text-align:right;">{{ current_year }} Total:</td>
+                            <td>{{ "%.2f"|format(year_total_fee) }}</td>
+                            <td>{{ "%.2f"|format(year_total_paid) }}</td>
+                            <td>{{ "%.2f"|format(year_total_balance) }}</td>
+                        </tr>
+                        {% set year_total_fee = 0.0 %}
+                        {% set year_total_paid = 0.0 %}
+                        {% set year_total_balance = 0.0 %}
+                    {% endif %}
+                    {% set current_year = r.academic_year %}
+                {% endif %}
+
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.admission_no }}</td>
+                    <td>
+                        {% if r.year == 1 %}1st
+                        {% elif r.year == 2 %}2nd
+                        {% elif r.year == 3 %}3rd
+                        {% else %}{{ r.year }}
+                        {% endif %}
+                    </td>
+                    <td>{{ r.group }}</td>
+                    <td>{{ r.academic_year }}</td>
+                    <td>{{ "%.2f"|format(r.tuition) }}</td>
+                    <td>{{ "%.2f"|format(r.internship) }}</td>
+                    <td>{{ "%.2f"|format(r.practical) }}</td>
+                    <td>{{ "%.2f"|format(r.university) }}</td>
+                    <td>{{ "%.2f"|format(r.stationary) }}</td>
+                    <td>{{ "%.2f"|format(r.bus) }}</td>
+                    <td>{{ "%.2f"|format(r.viva) }}</td>
+                    <td>{{ "%.2f"|format(r.total_fee) }}</td>
+                    <td>{{ "%.2f"|format(r.total_paid) }}</td>
+                    <td>{{ "%.2f"|format(r.balance) }}</td>
+                </tr>
+
+                {% set year_total_fee = year_total_fee + r.total_fee %}
+                {% set year_total_paid = year_total_paid + r.total_paid %}
+                {% set year_total_balance = year_total_balance + r.balance %}
+            {% endfor %}
+
+            {% if current_year %}
+                <tr style="background-color:#f2f2f2; font-weight:bold;">
+                    <td colspan="12" style="text-align:right;">{{ current_year }} Total:</td>
+                    <td>{{ "%.2f"|format(year_total_fee) }}</td>
+                    <td>{{ "%.2f"|format(year_total_paid) }}</td>
+                    <td>{{ "%.2f"|format(year_total_balance) }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript for Print -->
+<script>
+function printTable() {
+    const printContents = document.getElementById("print-section").innerHTML;
+    const printWindow = window.open('', '', 'height=600,width=900');
+    printWindow.document.write(`<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Aditya Degree College - Receipts</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    font-size: 11px;
+                    zoom: 80%;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    text-align: center;
+                }
+                th, td {
+                    border: 1px solid black;
+                    padding: 4px;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+                tr.total-row {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                }
+                h2 {
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>Aditya Degree College - All Fee Receipts</h2>
+            ${printContents}
+        </body>
+        </html>`);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background: url("{{ url_for('static', filename='img/college.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+    }
+    .login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }
+    .login-card { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); width: 100%; max-width: 400px; }
+    .login-card label { display: block; margin-bottom: 8px; color: #555; font-weight: bold; }
+    .login-card input[type="text"], .login-card input[type="email"], .login-card input[type="password"] { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+    .login-card .btn { background-color: #ff8800; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
+    .login-card .btn:hover { background-color: #e67a00; }
+</style>
+
+<div class="login-wrapper">
+    <div class="login-card">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" style="display:block; margin:auto; width:80px; margin-bottom: 20px;">
+        <h2 style="color:#ff8800; text-align:center;">Admin Registration</h2>
+        <form method="POST">
+            <label>Username</label>
+            <input type="text" name="username" value="{{ username or '' }}" required>
+            
+            <label>Email</label>
+            <input type="email" name="email" value="{{ email or '' }}" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password" required>
+            
+            <input type="submit" value="Register" class="btn">
+        </form>
+        <p style="text-align:center; margin-top:20px;">
+            Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
