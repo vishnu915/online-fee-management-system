@@ -110,5 +110,5 @@ This project is licensed under the MIT License.
 👨‍💻 Author
 
 Repana Vishnu Vardhan
-SDE Intern@SaiKet Systems | Python Full Stack Developer (Flask/React) | REST APIs | MySQL | AI/ML Enthusiast
+SDE Intern@IIT | Python Full Stack Developer (Flask/React) | REST APIs | MySQL | AI/ML Enthusiast
 
