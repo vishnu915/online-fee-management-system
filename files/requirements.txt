@@ -1,5 +1,0 @@
-Flask
-Flask-Login
-mysql-connector-python
-Werkzeug
-fpdf
