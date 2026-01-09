@@ -39,7 +39,7 @@ The requirements were gathered directly from the **college administration**, and
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/172fbbeb-7491-4ef7-8b94-80c09818ddc8" />
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0804e50b-2bb3-4350-aa9b-b7f99b408c9d" />
-
+video clip link :https://youtu.be/eRXSaxXhVgk
 (Add screenshots here)
 
 ---
